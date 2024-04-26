@@ -22,3 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
             role=validated_data['role']
         )
         return user
+
+    def validate(self, data):
+        if data['role'] not in ['admin', 'assistant', 'organizer']:
+            raise serializers.ValidationError("El rol debe ser ""admin"", ""assistant"" o ""organizer"".")
+        return data

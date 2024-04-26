@@ -1,11 +1,12 @@
 from django.db import models
-from user.models import User
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+User = get_user_model()
+
 class Event(models.Model):
 
     event_name = models.CharField(max_length=200)
-    organizer = models.ForeignKey(User, on_delete=models.PROTECT)
+    organizer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     event_date = models.DateField()
     description = models.TextField()
     location = models.CharField(max_length=200)
