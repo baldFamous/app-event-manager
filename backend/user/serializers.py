@@ -56,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
         """
         Validates the role field.
 
-        Checks if the role is one of the allowed roles ('admin', 'assistant', 'organizer').
+        Checks if the role is one of the allowed roles ('admin', 'assistant', 'organizer', 'user').
         If not, raises a ValidationError.
 
         Args:
@@ -69,6 +69,6 @@ class UserSerializer(serializers.ModelSerializer):
             ValidationError: If the role is not one of the allowed roles.
         """
 
-        if data['role'] not in ['admin', 'assistant', 'organizer']:
-            raise serializers.ValidationError("The role must be ""admin"", ""assistant"" o ""organizer"".")
+        if data['role'] not in ['admin', 'assistant', 'organizer', 'user']:
+            raise serializers.ValidationError("The role must be ""admin"", ""assistant"", ""organizer"" or ""user"".")
         return data

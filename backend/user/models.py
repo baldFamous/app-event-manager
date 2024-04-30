@@ -5,7 +5,7 @@ class User(AbstractUser):
     #username
     #email
     #password
-    role = models.CharField(max_length=200) # admin, assistant, organizer
+    role = models.CharField(max_length=200) # admin, assistant, organizer, user
 
     def __str__(self):
         return self.username + ' ' + self.role
