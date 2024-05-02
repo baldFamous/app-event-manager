@@ -6,6 +6,6 @@ urlpatterns = [
     path('accounts/', include('user.urls')),
     path('events/', include('event.urls')),
     path('reservations/', include('reservation.urls')),
-    #path('comments/', include('comment.urls')),
+    path('comments/', include('comment.urls')),
     path('valuations/', include('valuation.urls')),
 ]

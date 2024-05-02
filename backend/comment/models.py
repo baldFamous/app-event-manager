@@ -9,7 +9,7 @@ class Comment(models.Model):
     event = models.ForeignKey(Event, on_delete=models.PROTECT)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     comment = models.TextField()
-    comment_date = models.DateField()
+    comment_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"Comment {self.id}"
