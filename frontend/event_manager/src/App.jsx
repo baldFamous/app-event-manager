@@ -5,6 +5,7 @@ import EventPage from './pages/EventPage';
 import './App.css';
 import OrganizersPage from "./pages/OrganizersPage";
 import HelpPage from "./pages/HelpPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/events" element={<EventPage />} />
                     <Route path="/organizers" element={<OrganizersPage/>} />
                     <Route path="/help" element={<HelpPage />} />
+                    <Route path="/login" element={<LoginPage />} />
                 </Routes>
             </div>
         </Router>
