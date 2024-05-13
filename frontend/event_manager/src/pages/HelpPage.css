@@ -1,0 +1,30 @@
+.help-section {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.help-section h1 {
+    text-align: center;
+    color: #333;
+}
+
+.help-section section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.help-section h2 {
+    color: #007bff;
+}
+
+.help-section p {
+    line-height: 1.6;
+    color: #666;
+}

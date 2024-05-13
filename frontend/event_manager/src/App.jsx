@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import EventPage from './pages/EventPage';
 import './App.css';
 import OrganizersPage from "./pages/OrganizersPage";
+import HelpPage from "./pages/HelpPage";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/events" element={<EventPage />} />
                     <Route path="/organizers" element={<OrganizersPage/>} />
+                    <Route path="/help" element={<HelpPage />} />
                 </Routes>
             </div>
         </Router>
