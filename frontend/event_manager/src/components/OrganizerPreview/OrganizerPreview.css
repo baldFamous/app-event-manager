@@ -1,0 +1,15 @@
+.organizer-preview {
+    border: 1px solid #ddd; /* Borde sutil para la tarjeta */
+    padding: 20px;
+    margin: 10px 0; /* Espacio vertical entre tarjetas */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco para resaltar la tarjeta */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el efecto hover */
+    cursor: pointer; /* Indica que el elemento es clickeable */
+}
+
+.organizer-preview:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta ligeramente al hacer hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Sombra más prominente al hacer hover */
+}

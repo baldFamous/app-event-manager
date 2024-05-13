@@ -1,0 +1,12 @@
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas iguales en pantallas grandes */
+    gap: 20px; /* Espaciado entre eventos */
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr; /* Cambia a una columna en pantallas pequeñas */
+    }
+}

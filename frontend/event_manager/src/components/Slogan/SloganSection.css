@@ -1,0 +1,18 @@
+.slogan-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.slogan-image {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.slogan-text {
+    font-size: 24px;
+    color: #333;
+}

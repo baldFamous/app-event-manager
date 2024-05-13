@@ -1,0 +1,33 @@
+.events-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    background-color: #f9f9f9; /* Fondo claro para la lista de eventos */
+}
+
+.event-preview {
+    width: 90%; /* Ancho del preview de cada evento */
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco para resaltar cada evento */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+    transition: box-shadow 0.3s ease-in-out; /* Transición suave para efecto hover */
+}
+
+.event-preview:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa al hacer hover */
+}
+
+/* Hacer que los enlaces dentro de EventPreview sean visibles y atractivos */
+.event-preview a {
+    color: #007bff; /* Color azul para enlaces */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.event-preview a:hover {
+    text-decoration: underline; /* Subrayado al hacer hover para mejor interacción */
+}

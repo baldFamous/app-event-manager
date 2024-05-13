@@ -1,0 +1,6 @@
+.organizers-list {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    padding: 20px; /* Padding alrededor de la lista para espaciado */
+}

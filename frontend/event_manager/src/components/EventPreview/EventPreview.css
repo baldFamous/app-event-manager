@@ -1,0 +1,21 @@
+.event-preview {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.event-preview:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .event-preview {
+        padding: 10px;
+        margin: 10px;
+        flex-direction: column;  /* Cambia la dirección si usas flexbox en un contenedor padre */
+    }
+}
