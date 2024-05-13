@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
+import { login } from '../../api/authService.js';
 
 function LoginForm({ onToggleForm }) {
     const [username, setUsername] = useState('');
@@ -8,23 +9,12 @@ function LoginForm({ onToggleForm }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://your-backend-url/api/token/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await response.json();
-            if (response.ok) {
-                localStorage.setItem('token', data.access);  // Assuming 'access' is the token
-                console.log('Logged in successfully');
-                // Redirect or perform further actions
-            } else {
-                throw new Error(data.detail || 'Unable to login');
-            }
+            const data = await login(username, password);
+            console.log('Logged in successfully', data);
+            // Redirect or perform further actions
         } catch (error) {
             console.error('Login error:', error);
+            // Handle login errors, e.g., show an error message
         }
     };
 
