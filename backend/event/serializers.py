@@ -33,7 +33,8 @@ class EventSerializer(serializers.ModelSerializer):
             'event_date': {'required': True},
             'description': {'required': True},
             'location': {'required': True},
-            'price': {'required': True, 'min_value': 0.01}
+            'price': {'required': True, 'min_value': 0.01},
+            'date_created': {'read_only': True},
         }
 
     def create(self, validated_data):

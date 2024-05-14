@@ -151,3 +151,12 @@ class EventDetail(APIView):
         event = self.get_object(pk)
         event.delete()
         return Response({'message': 'Successfully deleted event'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class EventsOrdering(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        events = Event.objects.all().order_by('event_date')[:3]
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
