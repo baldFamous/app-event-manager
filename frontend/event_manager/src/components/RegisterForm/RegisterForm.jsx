@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterForm.css';
+import {useNavigate} from "react-router-dom";
+import {register} from "../../api/authService";
 
 function RegisterForm({ onToggleForm }) {
     const [username, setUsername] = useState('');
@@ -7,10 +9,18 @@ function RegisterForm({ onToggleForm }) {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Register:', { username, email, password, role });
-        // Aquí agregarías el código para interactuar con la API de autenticación
+        try {
+            const data = await register(username, password, email, role);
+            console.log('Registered successfully', data);
+            navigate('/login')
+        } catch (error){
+            console.error('Register error:', error);
+        }
     };
 
     return (
@@ -61,8 +71,8 @@ function RegisterForm({ onToggleForm }) {
                     required
                 >
                     <option value="">Selecciona un rol</option>
-                    <option value="usuario">Usuario</option>
-                    <option value="organizador">Organizador</option>
+                    <option value="Usuario">Usuario</option>
+                    <option value="Organizador">Organizador</option>
                 </select>
             </div>
             <button type="submit" className="submit-button">Registrarse</button>

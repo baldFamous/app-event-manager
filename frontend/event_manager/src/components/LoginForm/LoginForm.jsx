@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { login } from '../../api/authService.js';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm({ onToggleForm }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await login(username, password);
             console.log('Logged in successfully', data);
-            // Redirect or perform further actions
+            navigate('/')
         } catch (error) {
             console.error('Login error:', error);
             // Handle login errors, e.g., show an error message
