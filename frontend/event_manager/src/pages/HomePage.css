@@ -1,12 +1,16 @@
+.recent-events {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas iguales en pantallas grandes */
-    gap: 20px; /* Espaciado entre eventos */
-    padding: 20px;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+    gap: 20px;
 }
 
 @media (max-width: 768px) {
     .events-grid {
-        grid-template-columns: 1fr; /* Cambia a una columna en pantallas pequeñas */
+        grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
     }
 }

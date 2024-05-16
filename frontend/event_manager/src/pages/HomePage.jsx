@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar/NavBar';
+import SloganSection from '../components/Slogan/SloganSection';
 import EventPreview from '../components/EventPreview/EventPreview';
 import Footer from '../components/Footer/Footer';
-import SloganSection from "../components/Slogan/SloganSection";
+import { fetchRecentEvents } from '../api/eventService';
+import './HomePage.css';
 
 function HomePage() {
+    const [events, setEvents] = useState([]); // Estado para almacenar los eventos
+
+    useEffect(() => {
+        fetchRecentEvents()
+            .then(data => {
+                setEvents(data); // Actualiza el estado con los eventos recibidos
+            })
+            .catch(error => {
+                console.error("Error fetching recent events:", error);
+            });
+    }, []); // El arreglo vacío asegura que el efecto se ejecute solo una vez al montar el componente
+
     return (
         <div>
             <NavBar />
             <SloganSection />
             <br/>
-            <div className="featured-events">
-                <h2>Eventos Destacados</h2>
-                <div className="events-grid">
-                    <EventPreview title="Evento 1" description="Descripción del evento 1." />
-                    <EventPreview title="Evento 2" description="Descripción del evento 2." />
-                    <EventPreview title="Evento 3" description="Descripción del evento 3." />
-                </div>
-            </div>
-            <br/>
             <div className="recent-events">
                 <h2>Eventos Recientes</h2>
                 <div className="events-grid">
-                    <EventPreview title="Evento 4" description="Descripción del evento 4." />
-                    <EventPreview title="Evento 5" description="Descripción del evento 5." />
-                    <EventPreview title="Evento 6" description="Descripción del evento 6." />
+                    {events.map(event => (
+                        <EventPreview
+                            key={event.id}
+                            title={event.event_name}
+                            description={event.description}
+                            location = {event.location}
+                        />
+                    ))}
                 </div>
             </div>
             <Footer />
