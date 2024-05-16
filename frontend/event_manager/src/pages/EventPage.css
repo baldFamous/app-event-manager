@@ -1,0 +1,21 @@
+.filter-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.events-list {
+    padding: 20px;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ajusta según tus necesidades */
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr; /* Ajusta según tus necesidades */
+    }
+}
