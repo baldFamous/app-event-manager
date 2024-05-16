@@ -19,24 +19,33 @@ class EventList(APIView):
 
     def get(self, request):
         """
-        Handles the GET request to retrieve all events.
+        Handles the GET request to retrieve a list of events.
+
+        This method retrieves all events, ordered by their event date. If a 'location' query parameter is provided,
+        it filters the events to only include those where the location contains the provided string (case-insensitive).
 
         Args:
-            request (Request): The request object.
+            request (Request): The request object, which may include a 'location' query parameter.
 
         Returns:
-            Response: A response object containing the serialized event data.
-                      The data is a list of all events, each represented as a dictionary.
-                      If the request is successful, it returns a 200 status code.
+            Response: A response object containing the serialized event data. If the request is successful, it returns a 200 status code.
         """
 
-        # Retrieve all events
-        events = Event.objects.all()
+        # Retrieve the 'location' query parameter, if provided
+        location = request.query_params.get('location', None)
 
-        # Create an EventSerializer with the events and set many=True to serialize a queryset
+        # If a 'location' query parameter is provided, filter the events to only include
+        # those where the location contains the provided string (case-insensitive)
+        if location:
+            events = Event.objects.filter(location__icontains=location).order_by('event_date')
+        # If no 'location' query parameter is provided, retrieve all events
+        else:
+            events = Event.objects.all().order_by('event_date')
+
+        # Serialize the events
         serializer = EventSerializer(events, many=True)
 
-        # Return a response with the serialized event data
+        # Return a response object containing the serialized event data
         return Response(serializer.data)
 
     def post(self, request):
