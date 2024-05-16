@@ -49,3 +49,28 @@ export const fetchEvents = async (location = '') => {
         throw error;
     }
 };
+
+export const fetchEventById = async (id) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        throw new Error("No token found");
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}events/event/${id}/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Failed to fetch event');
+        }
+        return data;
+    } catch (error) {
+        console.error("Error fetching event:", error);
+        throw error;
+    }
+};

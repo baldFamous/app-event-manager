@@ -1,0 +1,45 @@
+.event-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-detail-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.event-detail-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.event-detail-header p {
+    font-size: 1rem;
+    color: #666;
+}
+
+
+.event-detail-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+@media (max-width: 768px) {
+    .event-detail-container {
+        padding: 15px;
+    }
+
+    .event-detail-header h1 {
+        font-size: 2rem;
+    }
+
+    .event-detail-content p {
+        font-size: 1rem;
+    }
+}
