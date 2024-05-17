@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OrganizerPreview from '../OrganizerPreview/OrganizerPreview';
 import OrganizerDetail from '../OrganizerDetail/OrganizerDetail';
+import { fetchOrganizers } from '../../api/eventService';
 import './OrganizersList.css';
 
 function OrganizersList() {
+    const [organizers, setOrganizers] = useState([]);
     const [selectedOrganizer, setSelectedOrganizer] = useState(null);
 
-    const organizers = [
-        { id: 1, name: 'Organizador 1', eventCount: 3, reservationCount: 150, description: "Descripción del Organizador 1", imageUrl: "url_to_image", events: [{ id: 101, name: "Evento 1" }] },
-        // Más organizadores con estructura similar
-    ];
+    useEffect(() => {
+        const loadOrganizers = async () => {
+            try {
+                const data = await fetchOrganizers();
+                setOrganizers(data);
+            } catch (error) {
+                console.error("Error fetching organizers:", error);
+            }
+        };
+
+        loadOrganizers();
+    }, []);
 
     const handleOrganizerClick = (organizer) => {
         setSelectedOrganizer(organizer);
@@ -22,7 +32,7 @@ function OrganizersList() {
     return (
         <div>
             {organizers.map(org => (
-                <OrganizerPreview key={org.id} organizer={org} onClick={() => handleOrganizerClick(org)} />
+                <OrganizerPreview key={org.organizer.id} organizer={org.organizer} onClick={() => handleOrganizerClick(org)} />
             ))}
             {selectedOrganizer && <OrganizerDetail organizer={selectedOrganizer} onClose={handleClose} />}
         </div>

@@ -74,3 +74,28 @@ export const fetchEventById = async (id) => {
         throw error;
     }
 };
+
+export const fetchOrganizers = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        throw new Error("No token found");
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}accounts/user/organizers/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Failed to fetch organizers');
+        }
+        return data;
+    } catch (error) {
+        console.error("Error fetching organizers:", error);
+        throw error;
+    }
+};
