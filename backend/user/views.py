@@ -3,6 +3,8 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
+from event.models import Event
+from event.serializers import EventSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 
@@ -175,3 +177,23 @@ class UserDetailView(APIView):
         user = self.get_object(id)
         user.delete()
         return Response({'message': 'Successfully deleted user'}, status=status.HTTP_204_NO_CONTENT)
+
+class Organizers(APIView):
+
+    def get(self, request):
+        User = get_user_model()
+
+        organizers = User.objects.filter(role='Organizador')
+        organizer_data = []
+
+        for organizer in organizers:
+            events = Event.objects.filter(organizer=organizer)
+            event_serializer = EventSerializer(events, many=True)
+            organizer_serializer = UserSerializer(organizer)
+            organizer_data.append({
+                'organizer': organizer_serializer.data,
+                'events': event_serializer.data
+            })
+
+        return Response(organizer_data)
+
