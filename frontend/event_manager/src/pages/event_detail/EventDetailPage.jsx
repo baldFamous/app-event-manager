@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { fetchEventById } from '../../api/eventService';
 import NavBar from "../../components/NavBar/NavBar";
 import SloganSection from "../../components/Slogan/SloganSection";
-import Footer from "../../components/Footer/Footer";
 import './EventDetailPage.css';
 
 function EventDetailPage() {
@@ -39,7 +38,6 @@ function EventDetailPage() {
                     <p>{event.description}</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import SloganSection from '../../components/Slogan/SloganSection';
 import EventPreview from '../../components/EventPreview/EventPreview';
-import Footer from '../../components/Footer/Footer';
 import { fetchRecentEvents } from '../../api/eventService';
 import './HomePage.css';
 
@@ -45,7 +44,6 @@ function HomePage() {
                     ))}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

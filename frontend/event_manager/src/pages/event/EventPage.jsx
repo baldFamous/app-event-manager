@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import EventPreview from '../../components/EventPreview/EventPreview';
-import Footer from '../../components/Footer/Footer';
 import EventFilters from '../../components/EventFilters/EventFilters';
 import { fetchEvents } from '../../api/eventService';
 import './EventPage.css';
@@ -53,7 +52,6 @@ function EventsPage() {
                     ))}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }
