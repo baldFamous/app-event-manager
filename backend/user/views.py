@@ -7,6 +7,7 @@ from event.models import Event
 from event.serializers import EventSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 
 
 
@@ -179,13 +180,33 @@ class UserDetailView(APIView):
         return Response({'message': 'Successfully deleted user'}, status=status.HTTP_204_NO_CONTENT)
 
 class Organizers(APIView):
+    """
+    APIView for handling the retrieval of all organizers and their associated events.
+
+    Inherits from the APIView class provided by Django Rest Framework.
+    """
 
     def get(self, request):
+        """
+        Handles the GET request to retrieve all organizers and their associated events.
+
+        Args:
+            request (Request): The request object.
+
+        Returns:
+            Response: A response object containing the serialized organizer and event data.
+                      The data is a list of dictionaries, each representing an organizer and their events.
+                      If the request is successful, it returns a 200 status code.
+        """
+
+        # Get the user model
         User = get_user_model()
 
+        # Retrieve all users with the role 'Organizador'
         organizers = User.objects.filter(role='Organizador')
         organizer_data = []
 
+        # For each organizer, retrieve their associated events and serialize both the organizer and their events
         for organizer in organizers:
             events = Event.objects.filter(organizer=organizer)
             event_serializer = EventSerializer(events, many=True)
@@ -195,5 +216,93 @@ class Organizers(APIView):
                 'events': event_serializer.data
             })
 
+        # Return a response with the serialized organizer and event data
         return Response(organizer_data)
 
+class UpdateUsernameView(APIView):
+    """
+    APIView for handling the update of the authenticated user's username.
+
+    Inherits from the APIView class provided by Django Rest Framework.
+    Requires the user to be authenticated to access, hence the IsAuthenticated permission class.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request):
+        """
+        Handles the PATCH request to update the authenticated user's username.
+
+        Args:
+            request (Request): The request object containing the new username.
+
+        Returns:
+            Response: A response object containing the serialized user data and status code.
+                      If the new username is provided and the username is updated successfully, it returns a 200 status code.
+                      If the new username is not provided, it returns a 400 status code with an error message.
+        """
+
+        # Retrieve the authenticated user
+        user = request.user
+
+        # Retrieve the new username from the request data
+        new_username = request.data.get('username', None)
+
+        # If the new username is not provided, return a 400 status code with an error message
+        if not new_username:
+            return Response({"detail": "New username not provided"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update the user's username
+        user.username = new_username
+        user.save()
+
+        # Serialize the user data
+        serializer = UserSerializer(user)
+
+        # Return a response with the serialized user data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UpdatePasswordView(APIView):
+    """
+    APIView for handling the update of the authenticated user's password.
+
+    Inherits from the APIView class provided by Django Rest Framework.
+    Requires the user to be authenticated to access, hence the IsAuthenticated permission class.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request):
+        """
+        Handles the PATCH request to update the authenticated user's password.
+
+        Args:
+            request (Request): The request object containing the old and new passwords.
+
+        Returns:
+            Response: A response object containing a success message and status code.
+                      If the old password is correct and the new password is provided, it updates the password and returns a 200 status code.
+                      If the old password is incorrect or the new password is not provided, it returns a 400 status code with an error message.
+        """
+
+        # Retrieve the authenticated user
+        user = request.user
+
+        # Retrieve the old and new passwords from the request data
+        old_password = request.data.get('old_password', None)
+        new_password = request.data.get('new_password', None)
+
+        # If the old or new password is not provided, return a 400 status code with an error message
+        if not old_password or not new_password:
+            return Response({"detail": "Old and new passwords are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # If the old password is incorrect, return a 400 status code with an error message
+        if not check_password(old_password, user.password):
+            return Response({"detail": "Old password is incorrect"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update the user's password
+        user.set_password(new_password)
+        user.save()
+
+        # Return a response with a success message
+        return Response({"detail": "Password updated successfully"}, status=status.HTTP_200_OK)

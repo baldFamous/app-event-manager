@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OrganizerPreview from '../OrganizerPreview/OrganizerPreview';
 import OrganizerDetail from '../OrganizerDetail/OrganizerDetail';
-import { fetchOrganizers } from '../../api/eventService';
+import { fetchOrganizers } from '../../../api/eventService';
 import './OrganizersList.css';
 
 function OrganizersList() {

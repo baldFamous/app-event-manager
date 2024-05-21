@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LoginForm from '../../components/LoginForm/LoginForm';
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import LoginForm from '../../components/login_comp/LoginForm/LoginForm';
+import RegisterForm from '../../components/login_comp/RegisterForm/RegisterForm';
 import NavBar from "../../components/NavBar/NavBar";
 import './LoginPage.css';
 

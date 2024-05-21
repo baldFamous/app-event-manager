@@ -1,0 +1,36 @@
+.account-menu {
+    position: relative;
+}
+
+.account-menu button {
+    background-color: white;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.account-dropdown {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.account-dropdown button, .account-dropdown a {
+    display: block;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    background-color: white;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.account-dropdown button:hover, .account-dropdown a:hover {
+    background-color: #f0f0f0;
+}

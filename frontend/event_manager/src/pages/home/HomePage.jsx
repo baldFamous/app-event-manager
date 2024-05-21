@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import SloganSection from '../../components/Slogan/SloganSection';
-import EventPreview from '../../components/EventPreview/EventPreview';
+import EventPreview from '../../components/event_comp/EventPreview/EventPreview';
 import { fetchRecentEvents } from '../../api/eventService';
 import './HomePage.css';
 

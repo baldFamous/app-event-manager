@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-import OrganizersList from '../../components/OrganizersList/OrganizersList';
+import OrganizersList from '../../components/organizer_comp/OrganizersList/OrganizersList';
 import SloganSection from "../../components/Slogan/SloganSection";
 /* import './OrganizersPage.css'; */
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterForm.css';
 import {useNavigate} from "react-router-dom";
-import {register} from "../../api/authService";
+import {register} from "../../../api/authService";
 
 function RegisterForm({ onToggleForm }) {
     const [username, setUsername] = useState('');
