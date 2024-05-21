@@ -3,7 +3,6 @@ import { login as apiLogin, register as apiRegister } from './authService';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/';
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -30,6 +29,8 @@ export const AuthProvider = ({ children }) => {
     const register = async (username, password, email, role) => {
         try {
             const data = await apiRegister(username, password, email, role);
+            // Opcional: Puedes actualizar el estado del usuario aquí si es necesario
+            // setUser(data.user);
             return data;
         } catch (error) {
             console.error("Failed to register:", error);
