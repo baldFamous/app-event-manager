@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { login as apiLogin, register as apiRegister } from './authService';
 
+const API_BASE_URL = 'http://127.0.0.1:8000/';
+
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -16,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (username, password) => {
         try {
             const data = await apiLogin(username, password);
-            setUser(data.user); // Asume que la respuesta del login incluye detalles del usuario
+            setUser(data.user);
             localStorage.setItem('token', data.access);
         } catch (error) {
             console.error("Failed to login:", error);
@@ -34,13 +37,63 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const updateUsername = async (newUsername) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}accounts/user/update/username/`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: newUsername })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update username');
+            }
+            const data = await response.json();
+            setUser(data);
+        } catch (error) {
+            console.error("Error updating username:", error);
+            throw error;
+        }
+    };
+
+    const updatePassword = async (oldPassword, newPassword) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}accounts/user/update/password/`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ old_password: oldPassword, new_password: newPassword })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update password');
+            }
+        } catch (error) {
+            console.error("Error updating password:", error);
+            throw error;
+        }
+    };
+
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout }}>
+        <AuthContext.Provider value={{ user, login, register, updateUsername, updatePassword, logout }}>
             {children}
         </AuthContext.Provider>
     );

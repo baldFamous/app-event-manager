@@ -3,12 +3,21 @@
 }
 
 .account-menu button {
-    background-color: white;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+    color: #ddd; /* Color de letra más claro */
+    background-color: #444; /* Fondo ligeramente más claro para cada enlace */
+    padding: 10px 15px;
+    border-radius: 10px; /* Bordes redondeados */
 }
+.account-menu a {
+    text-decoration: none;
+    color: #ddd; /* Color de letra más claro */
+    background-color: #444; /* Fondo ligeramente más claro para cada enlace */
+    padding: 10px 15px;
+    border-radius: 10px; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+
 
 .account-dropdown {
     position: absolute;

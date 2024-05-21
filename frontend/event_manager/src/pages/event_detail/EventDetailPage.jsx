@@ -28,8 +28,10 @@ function EventDetailPage() {
 
     return (
         <div>
-            <NavBar />
-            <SloganSection />
+            <NavBar/>
+            <SloganSection/>
+            <br/>
+            <br/>
             <div className="event-detail-container">
                 <div className="event-detail-header">
                     <h1>{event.event_name}</h1>
