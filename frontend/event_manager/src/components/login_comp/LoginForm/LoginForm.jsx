@@ -14,6 +14,7 @@ function LoginForm({ onToggleForm }) {
         try {
             await login(username, password);
             navigate('/')
+            navigate(0)
         } catch (error) {
             console.error('Login error:', error);
             // Handle login errors, e.g., show an error message
