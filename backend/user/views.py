@@ -2,6 +2,9 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .serializers import UserSerializer
 from event.models import Event
 from event.serializers import EventSerializer
@@ -306,3 +309,16 @@ class UpdatePasswordView(APIView):
 
         # Return a response with a success message
         return Response({"detail": "Password updated successfully"}, status=status.HTTP_200_OK)
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data['user'] = {
+            'id': self.user.id,
+            'username': self.user.username,
+            'email': self.user.email,
+        }
+        return data
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
