@@ -10,16 +10,20 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (token) {
-            fetchUserDetails(token).then(userDetails => setUser(userDetails)).catch(() => logout());
+        const userId = localStorage.getItem('userId');
+        if (token && userId) {
+            fetchUserById(userId).then(userDetails => setUser(userDetails)).catch(() => logout());
         }
     }, []);
 
     const login = async (username, password) => {
         try {
             const data = await apiLogin(username, password);
-            setUser(data.user);
             localStorage.setItem('token', data.access);
+            localStorage.setItem('userId', data.user.id); // Asegúrate de que 'data.user.id' existe en la respuesta
+            const userDetails = await fetchUserById(data.user.id);
+            setUser(userDetails);
+            return userDetails;
         } catch (error) {
             console.error("Failed to login:", error);
             throw error;
@@ -29,11 +33,36 @@ export const AuthProvider = ({ children }) => {
     const register = async (username, password, email, role) => {
         try {
             const data = await apiRegister(username, password, email, role);
-            // Opcional: Puedes actualizar el estado del usuario aquí si es necesario
-            // setUser(data.user);
             return data;
         } catch (error) {
             console.error("Failed to register:", error);
+            throw error;
+        }
+    };
+
+    const fetchUserById = async (id) => {
+        if (!id) {
+            throw new Error("No user ID provided");
+        }
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found");
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}accounts/user/${id}/`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch user details');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error("Error fetching user details:", error);
             throw error;
         }
     };
@@ -91,30 +120,14 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, updateUsername, updatePassword, logout }}>
+        <AuthContext.Provider value={{ user, login, register, fetchUserById, updateUsername, updatePassword, logout }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-const fetchUserDetails = async (token) => {
-    try {
-        const response = await fetch('http://127.0.0.1:8000/accounts/user/', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Failed to fetch user details');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error("Failed to fetch user details:", error);
-        throw error;
-    }
-};
-
-
+export default AuthContext;

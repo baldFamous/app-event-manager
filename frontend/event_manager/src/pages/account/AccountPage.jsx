@@ -1,31 +1,40 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../api/authContext';
 import { useNavigate } from 'react-router-dom';
 import './AccountPage.css';
 import NavBar from "../../components/NavBar/NavBar";
 
 function AccountPage() {
-    const { user, updateUsername, updatePassword, logout } = useContext(AuthContext);
+    const { user, updateUsername, updatePassword, fetchUserById } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState('');
+    const [newUsername, setUsername] = useState('');
+    const [username, setNewUsername] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [image, setImage] = useState('');
 
     useEffect(() => {
         if (user) {
-            setUsername(user.username);
-            setImage(user.imageUrl);
+            const fetchUserData = async () => {
+                try {
+                    const userId = localStorage.getItem('userId');
+                    const userDetails = await fetchUserById(userId);
+                    console.log(userDetails);
+                    setNewUsername(userDetails.username);
+                } catch (error) {
+                    console.error("Error fetching user details:", error);
+                }
+            };
+            fetchUserData();
         } else {
             navigate('/login'); // Redirigir a la página de inicio de sesión si no hay usuario
         }
-    }, [user, navigate]);
+    }, [user, navigate, fetchUserById]);
 
     const handleUsernameUpdate = async (e) => {
         e.preventDefault();
         try {
-            await updateUsername(username);
+            await updateUsername(newUsername);
             alert('Nombre de usuario actualizado correctamente.');
         } catch (error) {
             alert('Error al actualizar el nombre de usuario.');
@@ -42,11 +51,6 @@ function AccountPage() {
         }
     };
 
-    const handleLogout = () => {
-        logout();
-        navigate('/login'); // Redirigir a la página de inicio de sesión
-    };
-
     return (
         <div>
             <NavBar />
@@ -58,18 +62,19 @@ function AccountPage() {
                     <>
                         <form onSubmit={handleUsernameUpdate}>
                             <label>
-                                Nombre de usuario actual: {user.username}
+                                Nombre de usuario actual: {username}
                             </label>
                             <label>
                                 Nuevo nombre de usuario:
                                 <input
                                     type="text"
-                                    value={username}
+                                    value={newUsername}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
                             </label>
                             <button type="submit">Actualizar Nombre de Usuario</button>
                         </form>
+                        <br/>
 
                         <form onSubmit={handlePasswordUpdate}>
                             <label>
@@ -90,8 +95,6 @@ function AccountPage() {
                             </label>
                             <button type="submit">Actualizar Contraseña</button>
                         </form>
-
-                        <button onClick={handleLogout}>Cerrar Sesión</button>
                     </>
                 ) : (
                     <p>Cargando...</p>
