@@ -5,6 +5,7 @@ import EventPreview from '../../components/event_comp/EventPreview/EventPreview'
 import EventFilters from '../../components/event_comp/EventFilters/EventFilters';
 import { fetchEvents } from '../../api/eventService';
 import './EventPage.css';
+import SloganSection from "../../components/Slogan/SloganSection";
 
 function EventsPage() {
     const [events, setEvents] = useState([]);
@@ -36,6 +37,7 @@ function EventsPage() {
     return (
         <div>
             <NavBar />
+            <SloganSection />
             <div className="filter-section">
                 <EventFilters onFilterSubmit={handleFilterSubmit} />
             </div>
