@@ -2,44 +2,89 @@
     position: relative;
 }
 
-.account-menu button {
-    color: #ddd; /* Color de letra más claro */
-    background-color: #444; /* Fondo ligeramente más claro para cada enlace */
-    padding: 10px 15px;
-    border-radius: 10px; /* Bordes redondeados */
-}
-.account-menu a {
-    text-decoration: none;
-    color: #ddd; /* Color de letra más claro */
-    background-color: #444; /* Fondo ligeramente más claro para cada enlace */
-    padding: 10px 15px;
-    border-radius: 10px; /* Bordes redondeados */
-    transition: all 0.3s ease; /* Transición suave para efectos hover */
-}
-
-
-
-.account-dropdown {
-    position: absolute;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.account-dropdown button, .account-dropdown a {
-    display: block;
-    padding: 10px;
-    text-align: left;
-    width: 100%;
-    background-color: white;
-    color: #333;
+.account-button {
+    background: none;
     border: none;
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
-    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px; /* Añade bordes redondeados */
 }
 
-.account-dropdown button:hover, .account-dropdown a:hover {
-    background-color: #f0f0f0;
+.account-button:hover {
+    background-color: #555;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #444;
+    border: 1px solid #333;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px; /* Define un ancho mínimo */
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+    color: #ddd;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none; /* Remueve el subrayado de los enlaces */
+    transition: background-color 0.3s ease;
+    display: block; /* Asegura que los elementos ocupen toda la anchura disponible */
+    width: 100%; /* Asegura que el botón ocupe todo el ancho */
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+    background-color: #555;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: revert;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .nav-links.open {
+        max-height: 500px; /* Altura suficiente para mostrar todos los enlaces */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .dropdown-menu {
+        position: static;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .dropdown-menu a,
+    .dropdown-menu button {
+        background-color: #444;
+        margin: 5px 0;
+    }
 }

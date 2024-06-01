@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo-image {
@@ -16,6 +17,7 @@
 .nav-links {
     display: flex;
     gap: 20px; /* Espacio entre enlaces */
+    transition: max-height 0.3s ease-out;
 }
 
 .nav-links a {
@@ -32,16 +34,36 @@
     background-color: #555; /* Fondo más claro al pasar el ratón */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
 }
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 /* Responsividad */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: revert;
+        align-items: flex-start;
     }
 
     .nav-links {
         flex-direction: column;
         width: 100%;
-        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .nav-links.open {
+        max-height: 500px; /* Altura suficiente para mostrar todos los enlaces */
+    }
+
+    .menu-toggle {
+        display: block;
     }
 }

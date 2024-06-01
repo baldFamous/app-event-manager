@@ -12,18 +12,18 @@ function AccountMenu() {
     };
 
     return (
-        <div className="account-menu">
-            <button onClick={toggleMenu}>{user.username}</button>
-            {menuOpen && (
-                <div className="account-dropdown">
-                    <button onClick={logout}>Cerrar Sesión</button>
-                    <Link to="/account">Mi Cuenta</Link>
-                    {user.role === 'Organizador' && (
-                        <Link to="/add-event">Añadir Evento</Link>
-                    )}
-                </div>
-            )}
-        </div>
+    <div className="account-menu">
+        <button className="account-button" onClick={toggleMenu}>{user.username}</button>
+        {menuOpen && (
+            <div className="dropdown-menu">
+                <button onClick={logout}>Cerrar Sesión</button>
+                <Link to="/account">Mi Cuenta</Link>
+                {user.role === 'Organizador' && (
+                    <Link to="/add-event">Añadir Evento</Link>
+                )}
+            </div>
+        )}
+    </div>
     );
 }
 
