@@ -30,10 +30,12 @@ function OrganizersList() {
     };
 
     return (
-        <div>
-            {organizers.map(org => (
-                <OrganizerPreview key={org.organizer.id} organizer={org.organizer} onClick={() => handleOrganizerClick(org)} />
-            ))}
+        <div className="organizers-list-container">
+            <div className="organizers-list">
+                {organizers.map(org => (
+                    <OrganizerPreview key={org.organizer.id} organizer={org.organizer} onClick={() => handleOrganizerClick(org)} />
+                ))}
+            </div>
             {selectedOrganizer && <OrganizerDetail organizer={selectedOrganizer} onClose={handleClose} />}
         </div>
     );

@@ -19,3 +19,14 @@
         grid-template-columns: 1fr; /* Ajusta según tus necesidades */
     }
 }
+
+/* Nueva clase para el mensaje de advertencia */
+.alert-warning {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #f8d7da; /* Fondo rojo claro */
+    color: #721c24; /* Texto rojo oscuro */
+    border: 1px solid #f5c6cb; /* Borde rojo claro */
+    border-radius: 4px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto */
+}
