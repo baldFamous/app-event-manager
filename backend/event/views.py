@@ -163,6 +163,7 @@ class EventDetail(APIView):
 
 
 class EventsOrdering(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         events = Event.objects.all().order_by('event_date')[:3]
