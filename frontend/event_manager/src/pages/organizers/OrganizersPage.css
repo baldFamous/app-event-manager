@@ -1,6 +1,6 @@
 .organizers-page {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #F5F5F5;
 }
 
 .organizers-list {
@@ -14,9 +14,9 @@
 .alert-warning {
     padding: 15px;
     margin: 20px 0;
-    background-color: #f8d7da; /* Fondo rojo claro */
-    color: #721c24; /* Texto rojo oscuro */
-    border: 1px solid #f5c6cb; /* Borde rojo claro */
+    background-color: #FF9800; /* Fondo naranja */
+    color: #333; /* Texto oscuro */
+    border: 1px solid #FFA726; /* Borde naranja claro */
     border-radius: 4px; /* Bordes redondeados */
     text-align: center; /* Centrar el texto */
 }

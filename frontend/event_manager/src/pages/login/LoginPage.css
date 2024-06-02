@@ -3,7 +3,7 @@
     padding: 10px 20px;
     margin: 20px auto;
     display: block;
-    background-color: #007bff;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
@@ -14,7 +14,7 @@
 }
 
 .login-toggle-button:hover {
-    background-color: #0056b3;
+    background-color: #388E3C;
 }
 
 /* Estilo opcional: Centrar el botón si se desea */

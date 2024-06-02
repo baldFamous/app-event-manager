@@ -1,6 +1,6 @@
 import React from 'react';
 import './SloganSection.css';
-import sloganImage from '../../assets/logo.svg';// Asegúrate de tener una imagen en tu carpeta de assets
+import sloganImage from '../../assets/logo.png';// Asegúrate de tener una imagen en tu carpeta de assets
 
 function SloganSection() {
     return (

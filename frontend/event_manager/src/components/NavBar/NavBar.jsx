@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './NavBar.css';
-import logoImage from '../../assets/logo.svg';
+import logoImage from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../api/authContext';
 import AccountMenu from '../login_comp/AccountMenu/AccountMenu';
